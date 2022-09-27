@@ -94,8 +94,4 @@ public class CardPaymentPage {
     public void cvcError() {
         cvcFieldError.shouldHave(text("Неверный формат"), Duration.ofSeconds(60));
     }
-
-
-
-
 }

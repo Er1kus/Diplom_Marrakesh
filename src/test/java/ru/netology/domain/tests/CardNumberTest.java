@@ -41,16 +41,6 @@ public class CardNumberTest {
         }
 
         @Test
-        @Name("Все поля пустые")
-        void shouldInputEmptyFields() {
-            var mainPage = new MainPage();
-            var cardInfo = DataHelper.getEmptyCardInfo();
-            var cardPaymentPage = mainPage.chooseToPayByCard();
-            cardPaymentPage.fillingForm(cardInfo);
-            cardPaymentPage.emptyCardData();
-        }
-
-        @Test
         @Name("Случайный номер карты")
         void shouldInputRandomData() {
             var mainPage = new MainPage();
@@ -85,6 +75,7 @@ public class CardNumberTest {
         }
 
         @Test
+//        @RepeatedTest(3)
         @Name("Случайный номер карты")
         void shouldInputRandomData() {
             var mainPage = new MainPage();

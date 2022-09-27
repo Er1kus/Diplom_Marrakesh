@@ -18,8 +18,6 @@ allure {
         version = '2.16.1'
     }
 }
-
-
 repositories {
     mavenCentral()
 }
@@ -35,6 +33,7 @@ dependencies {
     testRuntimeOnly 'org.slf4j:slf4j-simple:1.7.32'
     testCompileOnly 'org.projectlombok:lombok:1.18.22'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
+    testImplementation 'org.postgresql:postgresql:42.3.3'
 }
 
 test {
