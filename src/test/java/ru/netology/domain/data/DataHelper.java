@@ -21,15 +21,15 @@ public class DataHelper {
     }
 
     public static CardInfo getCardInfo() {
-        return new CardInfo(getApprovedCardNumber(), generateMonth(), generateYear(), generateName(), generateCvc());
+        return new CardInfo(getApprovedCardNumber(), generateMonth(0), generateYear(0), generateName(), generateCvc());
     }
 
     public static CardInfo getDeclinedCardInfo() {
-        return new CardInfo(getDeclinedCardNumber(), generateMonth(), generateYear(), generateName(), generateCvc());
+        return new CardInfo(getDeclinedCardNumber(), generateMonth(1), generateYear(1), generateName(), generateCvc());
     }
 
     public static CardInfo getShortCardInfo() {
-        return new CardInfo(generateShortCardNumber(), generateMonth(), generateYear(), generateName(), generateCvc());
+        return new CardInfo(generateShortCardNumber(), generateMonth(1), generateYear(1), generateName(), generateCvc());
     }
 
     public static CardInfo getEmptyCardInfo() {
@@ -37,31 +37,11 @@ public class DataHelper {
     }
 
     public static CardInfo getRandomCardInfo() {
-        return new CardInfo(generateRandomCardNumber(), generateMonth(), generateYear(), generateName(), generateCvc());
-    }
-
-    public static CardInfo getOneDigitCardNumber() {
-        return new CardInfo(getCardNumberOfOneDigit(), generateMonth(), generateYear(), generateName(), generateCvc());
+        return new CardInfo(generateRandomCardNumber(), generateMonth(1), generateYear(0), generateName(), generateCvc());
     }
 
     public static CardInfo getCardNumberOfNulls() {
-        return new CardInfo(getNullCardNumber(), generateMonth(), generateYear(), generateName(), generateCvc());
-    }
-
-    public static CardInfo getCardNumberOfLetters() {
-        return new CardInfo(generateLettersInCardNumber(), generateMonth(), generateYear(), generateName(), generateCvc());
-    }
-
-    public static CardInfo getPunctuationMarksInCardNumber() {
-        return new CardInfo("$%{]/.>", generateMonth(), generateYear(), generateName(), generateCvc());
-    }
-
-    public static CardInfo getWhitespacesInCardNumber() {
-        return new CardInfo("             ", generateMonth(), generateYear(), generateName(), generateCvc());
-    }
-
-    public static CardInfo getLongCardNumber() {
-        return new CardInfo(generateLongCardNumber(), generateMonth(), generateYear(), generateName(), generateCvc());
+        return new CardInfo("0000 0000 0000 0000", generateMonth(1), generateYear(0), generateName(), generateCvc());
     }
 
     public static String getApprovedCardNumber() {
@@ -70,15 +50,6 @@ public class DataHelper {
 
     public static String getDeclinedCardNumber() {
         return "4444 4444 4444 4442";
-    }
-
-    public static String getNullCardNumber() {
-        return "0000 0000 0000 0000";
-    }
-
-    public static String generateLettersInCardNumber() {
-        Faker faker = new Faker(new Locale("en"));
-        return faker.letterify("???? ???? ???? ????");
     }
 
     public static String generateRandomCardNumber() {
@@ -91,58 +62,40 @@ public class DataHelper {
         return faker.number().digits(15);
     }
 
-    public static String generateLongCardNumber() {
-        Faker faker = new Faker(new Locale("en"));
-        return faker.number().digits(20);
-    }
-
-    public static String getCardNumberOfOneDigit() {
-        Faker faker = new Faker(new Locale("en"));
-        return faker.number().digits(1);
-    }
-
     public static CardInfo getNameInCyrillic() {
-        return new CardInfo(getApprovedCardNumber(), generateMonth(), generateYear(), generateNameInСyrillic(), generateCvc());
+        return new CardInfo(getApprovedCardNumber(), generateMonth(1), generateYear(0), generateNameInСyrillic(), generateCvc());
     }
 
     public static CardInfo getNameInPanjabi() {
-        return new CardInfo(getApprovedCardNumber(), generateMonth(), generateYear(), "ਹਾਇਰੋਗਲਿਫ਼", generateCvc());
+        return new CardInfo(getApprovedCardNumber(), generateMonth(1), generateYear(0), "ਹਾਇਰੋਗਲਿਫ਼", generateCvc());
     }
 
     public static CardInfo getNumbersInName() {
-        return new CardInfo(getApprovedCardNumber(), generateMonth(), generateYear(), generateNumbersInName(), generateCvc());
+        return new CardInfo(getApprovedCardNumber(), generateMonth(1), generateYear(0), generateNumbersInName(), generateCvc());
     }
 
     public static CardInfo getNameWithOneLetter() {
-        return new CardInfo(getApprovedCardNumber(), generateMonth(), generateYear(), generateNameWithOneLetter(), generateCvc());
+        return new CardInfo(getApprovedCardNumber(), generateMonth(1), generateYear(0), generateNameWithOneLetter(), generateCvc());
     }
 
     public static CardInfo getLongName() {
-        return new CardInfo(getApprovedCardNumber(), generateMonth(), generateYear(), generateLongName(), generateCvc());
+        return new CardInfo(getApprovedCardNumber(), generateMonth(1), generateYear(0), generateLongName(), generateCvc());
     }
 
     public static CardInfo getNameWithPunctuationMarks() {
-        return new CardInfo(getApprovedCardNumber(), generateMonth(), generateYear(), generatePunctuationMarksInName(), generateCvc());
+        return new CardInfo(getApprovedCardNumber(), generateMonth(1), generateYear(0), "$%{]/.>", generateCvc());
     }
 
     public static CardInfo getNameWithUpperCase() {
-        return new CardInfo(getApprovedCardNumber(), generateMonth(), generateYear(), generateNameInUpperCase(), generateCvc());
+        return new CardInfo(getApprovedCardNumber(), generateMonth(1), generateYear(0), generateNameInUpperCase(), generateCvc());
     }
 
     public static CardInfo getNameWithLowerCase() {
-        return new CardInfo(getApprovedCardNumber(), generateMonth(), generateYear(), generateNameInLowerCase(), generateCvc());
+        return new CardInfo(getApprovedCardNumber(), generateMonth(1), generateYear(0), generateNameInLowerCase(), generateCvc());
     }
 
     public static CardInfo getNameWithLWhitespaces() {
-        return new CardInfo(getApprovedCardNumber(), generateMonth(), generateYear(), generateNameWithWhitespaces(), generateCvc());
-    }
-
-    public static String generatePunctuationMarksInName() {
-        return "$%{]/.>";
-    }
-
-    public static String generateNameWithWhitespaces() {
-        return "            ";
+        return new CardInfo(getApprovedCardNumber(), generateMonth(1), generateYear(0), "            ", generateCvc());
     }
 
     public static String generateNameWithOneLetter() {
@@ -181,178 +134,60 @@ public class DataHelper {
     }
 
     public static CardInfo getMonthWithOneNumber() {
-        return new CardInfo(getApprovedCardNumber(), generateMonthWithOneNumber(), generateYear(), generateName(), generateCvc());
+        return new CardInfo(getApprovedCardNumber(), generateNaturalNumbers(), generateYear(1), generateName(), generateCvc());
     }
 
     public static CardInfo getMonthWithNulls() {
-        return new CardInfo(getApprovedCardNumber(), generateMonthWithNulls(), generateYearPlusOne(), generateName(), generateCvc());
-    }
-
-    public static CardInfo getMonthWithMinus() {
-        return new CardInfo(getApprovedCardNumber(), generateMonthWithMinus(), generateYearPlusOne(), generateName(), generateCvc());
-    }
-
-    public static CardInfo getMonthLargerThan14() {
-        return new CardInfo(getApprovedCardNumber(), generateMonthLargerThan14(), generateYearPlusOne(), generateName(), generateCvc());
+        return new CardInfo(getApprovedCardNumber(), "00", generateYear(1), generateName(), generateCvc());
     }
 
     public static CardInfo get13Month() {
-        return new CardInfo(getApprovedCardNumber(), generateNewThirteenthMonth(), generateYearPlusOne(), generateName(), generateCvc());
-    }
-
-    public static CardInfo getMonthWithLetters() {
-        return new CardInfo(getApprovedCardNumber(), generateMonthWithLetters(), generateYearPlusOne(), generateName(), generateCvc());
-    }
-
-    public static CardInfo getMonthWithWhitespaces() {
-        return new CardInfo(getApprovedCardNumber(), generateMonthWithWhitespaces(), generateYearPlusOne(), generateName(), generateCvc());
+        return new CardInfo(getApprovedCardNumber(), "13", generateYear(1), generateName(), generateCvc());
     }
 
     public static CardInfo getMonthInPast() {
-        return new CardInfo(getApprovedCardNumber(), generatePastMonth(), generateYear(), generateName(), generateCvc());
+        return new CardInfo(getApprovedCardNumber(), generateMonth(-1), generateYear(0), generateName(), generateCvc());
     }
 
-    public static CardInfo getMonthPunctuationMarksInMonth() {
-        return new CardInfo(getApprovedCardNumber(), generatePunctuationMarksInName(), generateYear(), generateName(), generateCvc());
+    public static String generateMonth(int monthToAdd) {
+        return LocalDate.now().plusMonths(monthToAdd).format(DateTimeFormatter.ofPattern("MM"));
     }
 
-    public static String generateMonthWithNulls() {
-        return "00";
-    }
-
-    public static String generateNewThirteenthMonth() {
-        return "13";
-    }
-
-    public static String generateMonthWithMinus() {
-        return "-1";
-    }
-
-    public static String generateMonthWithWhitespaces() {
-        return "            ";
-    }
-
-    public static String generateMonthWithLetters() {
-        Faker faker = new Faker(new Locale("en"));
-        return faker.letterify("??");
-    }
-
-    public static String generateMonthLargerThan14() {
-        Faker faker = new Faker(new Locale("en"));
-        return String.valueOf(faker.number().numberBetween(14, 99));
-    }
-
-    public static String generatePastMonth() {
-        return LocalDate.now().minusMonths(3).format(DateTimeFormatter.ofPattern("MM"));
-    }
-
-    public static String generateMonth() {
-        return LocalDate.now().format(DateTimeFormatter.ofPattern("MM"));
-    }
-
-    public static String generateMonthWithOneNumber() {
+    public static String generateNaturalNumbers() {
         Faker faker = new Faker(new Locale("en"));
         return String.valueOf(faker.number().numberBetween(1, 9));
     }
 
     public static CardInfo getYearWithOneNumber() {
-        return new CardInfo(getApprovedCardNumber(), generateMonth(), generateYearWithOneNumber(), generateName(), generateCvc());
+        return new CardInfo(getApprovedCardNumber(), generateMonth(1), generateNaturalNumbers(), generateName(), generateCvc());
     }
 
     public static CardInfo getYearInPast() {
-        return new CardInfo(getApprovedCardNumber(), generateMonth(), generateYearInPast(), generateName(), generateCvc());
+        return new CardInfo(getApprovedCardNumber(), generateMonth(0), generateYear(-1), generateName(), generateCvc());
     }
 
     public static CardInfo getYearWithNulls() {
-        return new CardInfo(getApprovedCardNumber(), generateMonth(), generateMonthWithNulls(), generateName(), generateCvc());
-    }
-
-    public static CardInfo getYearWithMinus() {
-        return new CardInfo(getApprovedCardNumber(), generateMonth(), generateMonthWithMinus(), generateName(), generateCvc());
-    }
-
-    public static CardInfo getYearWithWhitespaces() {
-        return new CardInfo(getApprovedCardNumber(), generateMonth(), generateMonthWithWhitespaces(), generateName(), generateCvc());
-    }
-
-    public static CardInfo getYearWithLetters() {
-        return new CardInfo(getApprovedCardNumber(), generateMonth(), generateMonthWithLetters(), generateName(), generateCvc());
-    }
-
-    public static CardInfo getYearWithPunctuation() {
-        return new CardInfo(getApprovedCardNumber(), generateMonth(), generatePunctuationMarksInName(), generateName(), generateCvc());
+        return new CardInfo(getApprovedCardNumber(), generateMonth(0), "00", generateName(), generateCvc());
     }
 
     public static CardInfo getYearInFuture() {
-        return new CardInfo(getApprovedCardNumber(), generateMonth(), generateYearInFuture(), generateName(), generateCvc());
+        return new CardInfo(getApprovedCardNumber(), generateMonth(1), generateYear(5), generateName(), generateCvc());
     }
 
     public static CardInfo getYearInFarFuture() {
-        return new CardInfo(getApprovedCardNumber(), generateMonth(), generateYearInFarFuture(), generateName(), generateCvc());
+        return new CardInfo(getApprovedCardNumber(), generateMonth(1), generateYear(6), generateName(), generateCvc());
     }
 
-    public static String generateYearInPast() {
-        return LocalDate.now().minusYears(1).format(DateTimeFormatter.ofPattern("YY"));
-    }
-
-    public static String generateYearInFuture() {
-        return LocalDate.now().plusYears(5).format(DateTimeFormatter.ofPattern("YY"));
-    }
-
-    public static String generateYearInFarFuture() {
-        return LocalDate.now().plusYears(6).format(DateTimeFormatter.ofPattern("YY"));
-    }
-
-    public static String generateYear() {
-        return LocalDate.now().format(DateTimeFormatter.ofPattern("YY"));
-    }
-
-    public static String generateYearWithOneNumber() {
-        Faker faker = new Faker(new Locale("en"));
-        return String.valueOf(faker.number().numberBetween(1, 9));
-    }
-
-    public static String generateYearPlusOne() {
-        return LocalDate.now().plusYears(1).format(DateTimeFormatter.ofPattern("YY"));
+    public static String generateYear(int yearToAdd) {
+        return LocalDate.now().plusYears(yearToAdd).format(DateTimeFormatter.ofPattern("YY"));
     }
 
     public static CardInfo getCvcWithOneNumber() {
-        return new CardInfo(getApprovedCardNumber(), generateMonth(), generateYearPlusOne(), generateName(), generateYearWithOneNumber());
-    }
-
-    public static CardInfo getCvcWithNulls() {
-        return new CardInfo(getApprovedCardNumber(), generateMonth(), generateYearPlusOne(), generateName(), generateCvcWithNulls());
-    }
-
-    public static CardInfo getCvcWithMinus() {
-        return new CardInfo(getApprovedCardNumber(), generateMonth(), generateYearPlusOne(), generateName(), "-333");
-    }
-
-    public static CardInfo getCvcWithWhitespaces() {
-        return new CardInfo(getApprovedCardNumber(), generateMonth(), generateYearPlusOne(), generateName(), "    ");
-    }
-
-    public static CardInfo getCvcWithLetters() {
-        return new CardInfo(getApprovedCardNumber(), generateMonth(), generateYearPlusOne(), generateName(), generateCvcWithLetters());
-    }
-
-    public static CardInfo getCvcWithPunctuation() {
-        return new CardInfo(getApprovedCardNumber(), generateMonth(), generateYearPlusOne(), generateName(), generatePunctuationMarksInName());
+        return new CardInfo(getApprovedCardNumber(), generateMonth(1), generateYear(1), generateName(), generateNaturalNumbers());
     }
 
     public static String generateCvc() {
         Faker faker = new Faker(new Locale("en"));
         return faker.number().digits(3);
     }
-
-    public static String generateCvcWithNulls() {
-        return "000";
-    }
-
-    public static String generateCvcWithLetters() {
-        Faker faker = new Faker(new Locale("en"));
-        return faker.letterify("???");
-    }
-
-
 }

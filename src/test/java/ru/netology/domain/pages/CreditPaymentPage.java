@@ -12,9 +12,9 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
-public class CardPaymentPage {
-    SelenideElement buyByCardButton = $x(".//span[text()='Купить']");
-    SelenideElement buyByCardHeading = $(byText("Оплата по карте"));
+public class CreditPaymentPage {
+    SelenideElement buyByCreditButton = $x(".//span[text()='Купить в кредит']");
+    SelenideElement buyByCreditHeading = $(byText("Кредит по данным карты"));
     SelenideElement cardNumberField = $x(".//input[@placeholder='0000 0000 0000 0000']");
     SelenideElement cardNumberFieldError = $x("(//*[@class='input__sub'][text()='Неверный формат'])[1]");
     SelenideElement monthField = $x(".//input[@placeholder='08']");
@@ -32,10 +32,9 @@ public class CardPaymentPage {
     SelenideElement successfulPaymentPopUp = $x("//*[@class='notification__title'][text()='Успешно']");
     SelenideElement unsuccessfulPaymentPopUp = $x("//*[@class='notification__title'][text()='Ошибка']");
 
-
-    public void cardPayment() {
-        buyByCardButton.click();
-        buyByCardHeading.shouldBe(Condition.visible);
+        public void creditPayment() {
+        buyByCreditButton.click();
+        buyByCreditHeading.shouldBe(Condition.visible);
     }
     public void fillingForm(DataHelper.CardInfo info) {
         cardNumberField.setValue(info.getNumber());
@@ -45,8 +44,7 @@ public class CardPaymentPage {
         cvcField.setValue(info.getCvc());
         goOnButton.click();
     }
-
-    public void successCardPayment() {
+    public void successCreditPayment() {
         successfulPaymentPopUp.shouldHave(text("Успешно"), Duration.ofSeconds(60));
     }
 
@@ -94,8 +92,4 @@ public class CardPaymentPage {
     public void cvcError() {
         cvcFieldError.shouldHave(text("Неверный формат"), Duration.ofSeconds(60));
     }
-
-
-
-
 }

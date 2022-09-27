@@ -8,10 +8,9 @@ import org.junit.jupiter.api.*;
 import ru.netology.domain.data.DataHelper;
 import ru.netology.domain.pages.MainPage;
 
+import static com.codeborne.selenide.Selenide.open;
 
-import static com.codeborne.selenide.Selenide.*;
-
-public class PositiveTest {
+public class CardNumberTest {
     @BeforeAll
     static void setUpAll() {
         SelenideLogger.addListener("allure", new AllureSelenide());
@@ -29,26 +28,16 @@ public class PositiveTest {
     }
 
     @Nested
-    @DisplayName("Позитивные проверки при оплате картой")
-    class SuccessWayCardPayment {
+    @DisplayName("Проверка поля 'Номер карты' при оплате картой")
+    class CardNumberValidation {
         @Test
-        @Name("Оплата с валидного номера карты")
-        void shouldGoWithValid() {
+        @Name("15ти значный номер карты")
+        void shouldInputShortCardNumber() {
             var mainPage = new MainPage();
-            var cardInfo = DataHelper.getCardInfo();
+            var cardInfo = DataHelper.getShortCardInfo();
             var cardPaymentPage = mainPage.chooseToPayByCard();
             cardPaymentPage.fillingForm(cardInfo);
-            cardPaymentPage.successCardPayment();
-        }
-
-        @Test
-        @Name("Оплата с невалидного номера карты")
-        void shouldGoWithInvalid() {
-            var mainPage = new MainPage();
-            var cardInfo = DataHelper.getDeclinedCardInfo();
-            var cardPaymentPage = mainPage.chooseToPayByCard();
-            cardPaymentPage.fillingForm(cardInfo);
-            cardPaymentPage.unSuccessCardPayment();
+            cardPaymentPage.numberFieldError();
         }
 
         @Test
@@ -60,39 +49,60 @@ public class PositiveTest {
             cardPaymentPage.fillingForm(cardInfo);
             cardPaymentPage.emptyCardData();
         }
-    }
 
-    @Nested
-    @DisplayName("Позитивные проверки при оплате в кредит")
-    class SuccessWayCreditCardPayment {
         @Test
-        @Name("Покупка в кредит с валидного номера карты")
-        void shouldGoWithValidCredit() {
+        @Name("Случайный номер карты")
+        void shouldInputRandomData() {
             var mainPage = new MainPage();
-            var cardInfo = DataHelper.getCardInfo();
-            var creditPaymentPage = mainPage.chooseToPayByCredit();
-            creditPaymentPage.fillingForm(cardInfo);
-            creditPaymentPage.successCreditPayment();
+            var cardInfo = DataHelper.getRandomCardInfo();
+            var cardPaymentPage = mainPage.chooseToPayByCard();
+            cardPaymentPage.fillingForm(cardInfo);
+            cardPaymentPage.unSuccessCardPayment();
         }
 
         @Test
-        @Name("Покупка в кредит с невалидного номера карты")
-        void shouldGoWithInvalidCredit() {
+        @Name("Номер карты из 16-ти нулей")
+        void shouldInputNullsInCardNumber() {
             var mainPage = new MainPage();
-            var cardInfo = DataHelper.getDeclinedCardInfo();
+            var cardInfo = DataHelper.getCardNumberOfNulls();
+            var cardPaymentPage = mainPage.chooseToPayByCard();
+            cardPaymentPage.fillingForm(cardInfo);
+            cardPaymentPage.unSuccessCardPayment();
+        }
+    }
+
+    @Nested
+    @DisplayName("Проверка поля 'Номер карты' при оплате в кредит")
+    class CreditCardNumberValidation {
+        @Test
+        @Name("15ти значный номер карты")
+        void shouldInputShortCardNumber() {
+            var mainPage = new MainPage();
+            var cardInfo = DataHelper.getShortCardInfo();
+            var creditPaymentPage = mainPage.chooseToPayByCredit();
+            creditPaymentPage.fillingForm(cardInfo);
+            creditPaymentPage.numberFieldError();
+        }
+
+        @Test
+        @Name("Случайный номер карты")
+        void shouldInputRandomData() {
+            var mainPage = new MainPage();
+            var cardInfo = DataHelper.getRandomCardInfo();
             var creditPaymentPage = mainPage.chooseToPayByCredit();
             creditPaymentPage.fillingForm(cardInfo);
             creditPaymentPage.unSuccessCardPayment();
         }
 
         @Test
-        @Name("Все поля пустые")
-        void shouldInputEmptyFieldsCredit() {
+        @Name("Номер карты из 16-ти нулей")
+        void shouldInputNullsInCardNumber() {
             var mainPage = new MainPage();
-            var cardInfo = DataHelper.getEmptyCardInfo();
+            var cardInfo = DataHelper.getCardNumberOfNulls();
             var creditPaymentPage = mainPage.chooseToPayByCredit();
             creditPaymentPage.fillingForm(cardInfo);
-            creditPaymentPage.emptyCardData();
+            creditPaymentPage.unSuccessCardPayment();
         }
     }
 }
+
