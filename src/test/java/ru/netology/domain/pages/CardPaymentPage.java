@@ -41,10 +41,10 @@ public class RequestPage {
         buyByCardHeading.shouldBe(Condition.visible);
     }
 
-    public void creditPayment() {
-        buyByCreditButton.click();
-        buyByCreditHeading.shouldBe(Condition.visible);
-    }
+//    public void creditPayment() {
+//        buyByCreditButton.click();
+//        buyByCreditHeading.shouldBe(Condition.visible);
+//    }
 
     public void fillingForm(String number, String month, String year, String cardholder, String cvc) {
         cardNumberField.setValue(number);
@@ -67,11 +67,11 @@ public class RequestPage {
         unsuccessfulPaymentPopUp.shouldHave(text("Ошибка"), Duration.ofSeconds(20));
     }
 
-    public void validCardNumberCreditPay(DataHelper.CardInfo info) {
-        creditPayment();
-        fillingForm(info.getNumber(), info.getMonth(), info.getYear(), info.getCardholder(), info.getCvc());
-        successfulPaymentPopUp.shouldHave(text("Успешно"), Duration.ofSeconds(20));
-    }
+//    public void validCardNumberCreditPay(DataHelper.CardInfo info) {
+//        creditPayment();
+//        fillingForm(info.getNumber(), info.getMonth(), info.getYear(), info.getCardholder(), info.getCvc());
+//        successfulPaymentPopUp.shouldHave(text("Успешно"), Duration.ofSeconds(20));
+//    }
 
     public void shortCardNumberPay(DataHelper.CardInfo info) {
         cardPayment();
@@ -79,11 +79,11 @@ public class RequestPage {
         cardNumberFieldError.shouldHave(text("Неверный формат"), Duration.ofSeconds(20));
     }
 
-    public void longCardNumberPay(DataHelper.CardInfo info) {
-        cardPayment();
-        fillingForm(info.getNumber(), info.getMonth(), info.getYear(), info.getCardholder(), info.getCvc());
-        unsuccessfulPaymentPopUp.shouldHave(text("Ошибка"), Duration.ofSeconds(20));
-    }
+//    public void longCardNumberPay(DataHelper.CardInfo info) {
+//        cardPayment();
+//        fillingForm(info.getNumber(), info.getMonth(), info.getYear(), info.getCardholder(), info.getCvc());
+//        unsuccessfulPaymentPopUp.shouldHave(text("Ошибка"), Duration.ofSeconds(20));
+//    }
 
     public void emptyCardData(DataHelper.CardInfo info) {
         cardPayment();
@@ -101,11 +101,11 @@ public class RequestPage {
         unsuccessfulPaymentPopUp.shouldHave(text("Ошибка"), Duration.ofSeconds(20));
     }
 
-    public void cardNumberOfOneDigit(DataHelper.CardInfo info) {
-        cardPayment();
-        fillingForm(info.getNumber(), info.getMonth(), info.getYear(), info.getCardholder(), info.getCvc());
-        cardNumberFieldError.shouldHave(text("Неверный формат"), Duration.ofSeconds(20));
-    }
+//    public void cardNumberOfOneDigit(DataHelper.CardInfo info) {
+//        cardPayment();
+//        fillingForm(info.getNumber(), info.getMonth(), info.getYear(), info.getCardholder(), info.getCvc());
+//        cardNumberFieldError.shouldHave(text("Неверный формат"), Duration.ofSeconds(20));
+//    }
 
     public void cardNumberOfNulls(DataHelper.CardInfo info) {
         cardPayment();
@@ -113,23 +113,23 @@ public class RequestPage {
         unsuccessfulPaymentPopUp.shouldHave(text("Ошибка"), Duration.ofSeconds(20));
     }
 
-    public void cardNumberOfLetters(DataHelper.CardInfo info) {
-        cardPayment();
-        fillingForm(info.getNumber(), info.getMonth(), info.getYear(), info.getCardholder(), info.getCvc());
-        cardNumberFieldError.shouldHave(text("Неверный формат"), Duration.ofSeconds(20));
-    }
+//    public void cardNumberOfLetters(DataHelper.CardInfo info) {
+//        cardPayment();
+//        fillingForm(info.getNumber(), info.getMonth(), info.getYear(), info.getCardholder(), info.getCvc());
+//        cardNumberFieldError.shouldHave(text("Неверный формат"), Duration.ofSeconds(20));
+//    }
 
-    public void cardNumberOfPunctuationAndOtherMarks(DataHelper.CardInfo info) {
-        cardPayment();
-        fillingForm(info.getNumber(), info.getMonth(), info.getYear(), info.getCardholder(), info.getCvc());
-        cardNumberFieldError.shouldHave(text("Неверный формат"), Duration.ofSeconds(20));
-    }
+//    public void cardNumberOfPunctuationAndOtherMarks(DataHelper.CardInfo info) {
+//        cardPayment();
+//        fillingForm(info.getNumber(), info.getMonth(), info.getYear(), info.getCardholder(), info.getCvc());
+//        cardNumberFieldError.shouldHave(text("Неверный формат"), Duration.ofSeconds(20));
+//    }
 
-    public void cardNumberOfWhitespaces(DataHelper.CardInfo info) {
-        cardPayment();
-        fillingForm(info.getNumber(), info.getMonth(), info.getYear(), info.getCardholder(), info.getCvc());
-        cardNumberFieldError.shouldHave(text("Неверный формат"), Duration.ofSeconds(20));
-    }
+//    public void cardNumberOfWhitespaces(DataHelper.CardInfo info) {
+//        cardPayment();
+//        fillingForm(info.getNumber(), info.getMonth(), info.getYear(), info.getCardholder(), info.getCvc());
+//        cardNumberFieldError.shouldHave(text("Неверный формат"), Duration.ofSeconds(20));
+//    }
 
     public void nameInCyrillic(DataHelper.CardInfo info) {
         cardPayment();
