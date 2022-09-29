@@ -1,6 +1,5 @@
 package ru.netology.domain.pages;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import ru.netology.domain.data.DataHelper;
 
@@ -13,30 +12,28 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class CardPaymentPage {
-    SelenideElement buyByCardButton = $x(".//span[text()='Купить']");
-    SelenideElement buyByCardHeading = $(byText("Оплата по карте"));
-    SelenideElement cardNumberField = $x(".//input[@placeholder='0000 0000 0000 0000']");
-    SelenideElement cardNumberFieldError = $x("(//*[@class='input__sub'][text()='Неверный формат'])[1]");
-    SelenideElement monthField = $x(".//input[@placeholder='08']");
-    SelenideElement monthFieldEmptyError = $x("//*[@class='input__sub'][text()='Неверный формат']");
-    SelenideElement wrongMonthFieldError = $x("//*[@class='input__sub'][text()='Неверно указан срок действия карты']");
-    SelenideElement yearField = $x(".//input[@placeholder='22']");
-    SelenideElement yearFieldError = $x("//*[@id=\"root\"]/div/form/fieldset/div[2]/span/span[2]/span/span/span[3]");
-    SelenideElement earlyYearFieldError = $x("//*[@class='input__sub'][text()='Истёк срок действия карты']");
-    SelenideElement futureYearError = $x("//*[@class='input__sub'][text()='Неверно указан срок действия карты']");
-    SelenideElement cardholderField = $x("(.//*[@class='input__control'])[4]");
-    SelenideElement cardholderFieldError = $x("//*[@class='input__sub'][text()='Поле обязательно для заполнения']");
-    SelenideElement cvcField = $x(".//input[@placeholder='999']");
-    SelenideElement cvcFieldError = $x("//*[@class='input__sub'][text()='Неверный формат']");
-    SelenideElement goOnButton = $x(".//span[text()='Продолжить']");
-    SelenideElement successfulPaymentPopUp = $x("//*[@class='notification__title'][text()='Успешно']");
-    SelenideElement unsuccessfulPaymentPopUp = $x("//*[@class='notification__title'][text()='Ошибка']");
+    private SelenideElement buyByCardHeading = $(byText("Оплата по карте"));
+    private SelenideElement cardNumberField = $x(".//input[@placeholder='0000 0000 0000 0000']");
+    private SelenideElement cardNumberFieldError = $x("(//*[@class='input__sub'][text()='Неверный формат'])[1]");
+    private SelenideElement monthField = $x(".//input[@placeholder='08']");
+    private SelenideElement monthFieldEmptyError = $x("//*[@class='input__sub'][text()='Неверный формат']");
+    private SelenideElement wrongMonthFieldError = $x("//*[@class='input__sub'][text()='Неверно указан срок действия карты']");
+    private SelenideElement yearField = $x(".//input[@placeholder='22']");
+    private SelenideElement yearFieldError = $x("//*[@id=\"root\"]/div/form/fieldset/div[2]/span/span[2]/span/span/span[3]");
+    private SelenideElement earlyYearFieldError = $x("//*[@class='input__sub'][text()='Истёк срок действия карты']");
+    private SelenideElement futureYearError = $x("//*[@class='input__sub'][text()='Неверно указан срок действия карты']");
+    private SelenideElement cardholderField = $x("(.//*[@class='input__control'])[4]");
+    private SelenideElement cardholderFieldError = $x("//*[@class='input__sub'][text()='Поле обязательно для заполнения']");
+    private SelenideElement cvcField = $x(".//input[@placeholder='999']");
+    private SelenideElement cvcFieldError = $x("//*[@class='input__sub'][text()='Неверный формат']");
+    private SelenideElement goOnButton = $x(".//span[text()='Продолжить']");
+    private SelenideElement successfulPaymentPopUp = $x("//*[@class='notification__title'][text()='Успешно']");
+    private SelenideElement unsuccessfulPaymentPopUp = $x("//*[@class='notification__title'][text()='Ошибка']");
 
-
-    public void cardPayment() {
-        buyByCardButton.click();
-        buyByCardHeading.shouldBe(Condition.visible);
+    public CardPaymentPage() {
+        buyByCardHeading.shouldBe(visible);
     }
+
     public void fillingForm(DataHelper.CardInfo info) {
         cardNumberField.setValue(info.getNumber());
         monthField.setValue(info.getMonth());

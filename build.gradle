@@ -34,6 +34,9 @@ dependencies {
     testCompileOnly 'org.projectlombok:lombok:1.18.22'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
     testImplementation 'org.postgresql:postgresql:42.3.3'
+    testImplementation 'io.rest-assured:rest-assured:4.3.1'
+    testImplementation 'io.rest-assured:json-schema-validator:4.3.1'
+    testImplementation 'com.google.code.gson:gson:2.8.6'
 }
 
 test {

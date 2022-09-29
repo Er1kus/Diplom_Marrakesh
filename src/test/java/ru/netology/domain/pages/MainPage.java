@@ -1,11 +1,8 @@
 package ru.netology.domain.pages;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 
-import static com.codeborne.selenide.Selectors.byText;
-import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class MainPage {
@@ -16,7 +13,8 @@ public class MainPage {
 
 
     public MainPage() {
-        mainTitleHeading.shouldHave(Condition.text("Путешествие дня"));
+        mainTitleHeading.shouldHave(Condition.text("Путешествие дня")).shouldBe(Condition.visible);
+        mainPageBody.shouldBe(Condition.visible);
     }
 
     public CardPaymentPage chooseToPayByCard() {
