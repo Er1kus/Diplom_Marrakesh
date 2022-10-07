@@ -7,6 +7,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
+import static com.github.javafaker.CreditCardType.MASTERCARD;
+import static com.github.javafaker.CreditCardType.VISA;
+
 public class DataHelper {
     private DataHelper() {
     }
@@ -54,7 +57,8 @@ public class DataHelper {
 
     public static String generateRandomCardNumber() {
         Faker faker = new Faker(new Locale("en"));
-        return faker.finance().creditCard();
+//        return faker.finance().creditCard();
+        return faker.finance().creditCard(MASTERCARD);
     }
 
     public static String generateNumber(int digit) {
