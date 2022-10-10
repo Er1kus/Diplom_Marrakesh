@@ -11,7 +11,7 @@ import ru.netology.domain.data.DataHelper;
 import ru.netology.domain.pages.MainPage;
 
 import static com.codeborne.selenide.Selenide.open;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static ru.netology.domain.data.DBHelper.*;
 
 public class DBTests {
@@ -47,9 +47,9 @@ public class DBTests {
             var cardPaymentPage = mainPage.chooseToPayByCard();
             cardPaymentPage.fillingForm(cardInfo);
             cardPaymentPage.successCardPayment();
-            val expectedStatus = "APPROVED";
-            val actualStatus = getPaymentStatusInfo();
-            assertEquals(expectedStatus, actualStatus);
+            val expected = "APPROVED";
+            val actual = getPaymentInfo().getStatus();
+            assertEquals(expected, actual);
         }
 
         @Test
@@ -60,9 +60,9 @@ public class DBTests {
             var cardPaymentPage = mainPage.chooseToPayByCard();
             cardPaymentPage.fillingForm(cardInfo);
             cardPaymentPage.successCardPayment();
-            val expectedStatus = "DECLINED";
-            val actualStatus = getPaymentStatusInfo();
-            assertEquals(expectedStatus, actualStatus);
+            val expected = "DECLINED";
+            val actual = getPaymentInfo().getStatus();
+            assertEquals(expected, actual);
         }
 
         @Test
@@ -73,7 +73,7 @@ public class DBTests {
             var cardPaymentPage = mainPage.chooseToPayByCard();
             cardPaymentPage.fillingForm(cardInfo);
             cardPaymentPage.successCardPayment();
-            assertEquals(0, DBHelper.getOrderCountInfo());
+            assertNull(DBHelper.getOrderInfo());
         }
 
         @Test
@@ -84,8 +84,7 @@ public class DBTests {
             var cardPaymentPage = mainPage.chooseToPayByCard();
             cardPaymentPage.fillingForm(cardInfo);
             cardPaymentPage.successCardPayment();
-            assertEquals(DBHelper.getPaymentId(), DBHelper.getPaymentTransactionInfo());
-
+            assertEquals(DBHelper.getOrderInfo().getPayment_id(), getPaymentInfo().getTransaction_id());
         }
     }
 
@@ -100,9 +99,9 @@ public class DBTests {
             var creditPaymentPage = mainPage.chooseToPayByCredit();
             creditPaymentPage.fillingForm(cardInfo);
             creditPaymentPage.successCreditPayment();
-            val expectedStatus = "APPROVED";
-            val actualStatus = getCreditStatusInfo();
-            assertEquals(expectedStatus, actualStatus);
+            val expected = "APPROVED";
+            val actual = getCreditInfo().getStatus();
+            assertEquals(expected, actual);
         }
 
         @Test
@@ -113,9 +112,9 @@ public class DBTests {
             var creditPaymentPage = mainPage.chooseToPayByCredit();
             creditPaymentPage.fillingForm(cardInfo);
             creditPaymentPage.successCreditPayment();
-            val expectedStatus = "DECLINED";
-            val actualStatus = getCreditStatusInfo();
-            assertEquals(expectedStatus, actualStatus);
+            val expected = "DECLINED";
+            val actual = getCreditInfo().getStatus();
+            assertEquals(expected, actual);
         }
 
         @Test
@@ -126,7 +125,7 @@ public class DBTests {
             var creditPaymentPage = mainPage.chooseToPayByCredit();
             creditPaymentPage.fillingForm(cardInfo);
             creditPaymentPage.successCreditPayment();
-            assertEquals(0, DBHelper.getCreditCountInfo());
+            assertNull(DBHelper.getCreditInfo());
         }
 
         @Test
@@ -137,7 +136,7 @@ public class DBTests {
             var creditPaymentPage = mainPage.chooseToPayByCredit();
             creditPaymentPage.fillingForm(cardInfo);
             creditPaymentPage.successCreditPayment();
-            assertEquals(DBHelper.getBankId(), DBHelper.getCreditId());
+            assertEquals(DBHelper.getOrderInfo().getCredit_id(), getCreditInfo().getBank_id());
 
         }
     }
