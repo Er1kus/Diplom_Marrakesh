@@ -36,6 +36,11 @@ public class PositiveTest {
         open("http://localhost:8080");
     }
 
+    @AfterEach
+    void clearData() {
+        DBHelper.DropData();
+    }
+
     @Nested
     @DisplayName("Позитивные проверки при оплате картой")
     class SuccessWayCardPayment {

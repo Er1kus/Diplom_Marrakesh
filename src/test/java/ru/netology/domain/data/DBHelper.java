@@ -20,23 +20,18 @@ public class DBHelper {
         private String payment_id;
     }
 
-    private static QueryRunner runner;
-    private static Connection conn;
     private static String user = System.getProperty("user");
-    private static String password = System.getProperty("pass");
+    private static String password = System.getProperty("password");
     private static String url = System.getProperty("url");
 
-    @SneakyThrows
-    public static void setup() {
-        runner = new QueryRunner();
-        conn = DriverManager.getConnection(url, user, password);
-    }
 
     @SneakyThrows
     public static OrderEntity getOrderInfo() {
-        setup();
+        var runner = new QueryRunner();
         var sqlOrderQuery = "SELECT * FROM order_entity ORDER BY created DESC";
-        return runner.query(conn, sqlOrderQuery, new BeanHandler<>(OrderEntity.class));
+        try (var conn = DriverManager.getConnection(url, user, password)) {
+            return runner.query(conn, sqlOrderQuery, new BeanHandler<>(OrderEntity.class));
+        }
     }
 
 
@@ -53,8 +48,11 @@ public class DBHelper {
 
     @SneakyThrows
     public static PaymentEntity getPaymentInfo() {
+        var runner = new QueryRunner();
         var sqlPaymentQuery = "SELECT * FROM payment_entity ORDER BY created DESC";
-        return runner.query(conn, sqlPaymentQuery, new BeanHandler<>(PaymentEntity.class));
+        try (var conn = DriverManager.getConnection(url, user, password);) {
+            return runner.query(conn, sqlPaymentQuery, new BeanHandler<>(PaymentEntity.class));
+        }
     }
 
     @Data
@@ -69,18 +67,23 @@ public class DBHelper {
 
     @SneakyThrows
     public static CreditRequestEntity getCreditInfo() {
+        var runner = new QueryRunner();
         var sqlCreditQuery = "SELECT * FROM credit_request_entity ORDER BY created DESC;";
-        return runner.query(conn, sqlCreditQuery, new BeanHandler<>(CreditRequestEntity.class));
+        try (var conn = DriverManager.getConnection(url, user, password);) {
+            return runner.query(conn, sqlCreditQuery, new BeanHandler<>(CreditRequestEntity.class));
+        }
     }
 
     @SneakyThrows
     public static void DropData() {
+        var runner = new QueryRunner();
         var deleteOrders = "DELETE FROM order_entity";
         var deletePayments = "DELETE FROM payment_entity";
         var deleteCreditRequests = "DELETE FROM credit_request_entity";
-        runner.update(conn, deleteOrders);
-        runner.update(conn, deletePayments);
-        runner.update(conn, deleteCreditRequests);
-
+        try (var conn = DriverManager.getConnection(url, user, password);) {
+            runner.update(conn, deleteOrders);
+            runner.update(conn, deletePayments);
+            runner.update(conn, deleteCreditRequests);
+        }
     }
 }

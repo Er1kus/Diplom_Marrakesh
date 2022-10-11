@@ -5,6 +5,7 @@ import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
 import jdk.jfr.Name;
 import org.junit.jupiter.api.*;
+import ru.netology.domain.data.DBHelper;
 import ru.netology.domain.data.DataHelper;
 import ru.netology.domain.pages.MainPage;
 
@@ -28,6 +29,11 @@ public class CVCCVVTest {
         open("http://localhost:8080");
     }
 
+    @AfterEach
+    void clearData() {
+        DBHelper.DropData();
+    }
+
     @Nested
     @DisplayName("Проверка поля 'CVC/CVV' при оплате картой ")
     class CardCVCValidation {
@@ -40,6 +46,7 @@ public class CVCCVVTest {
             cardPaymentPage.fillingForm(cardInfo);
             cardPaymentPage.cvcError();
         }
+
         @Test
         @Name("Ввод в поле 'CVC/CVV' двух цифр")
         void shouldSetCvcWithTwoNumbers() {
@@ -49,6 +56,7 @@ public class CVCCVVTest {
             cardPaymentPage.fillingForm(cardInfo);
             cardPaymentPage.cvcError();
         }
+
         @Test
         @Name("Пустое поле 'CVC/CVV'")
         void shouldSetCvcEmpty() {
@@ -72,6 +80,7 @@ public class CVCCVVTest {
             creditPaymentPage.fillingForm(cardInfo);
             creditPaymentPage.cvcError();
         }
+
         @Test
         @Name("Ввод в поле 'CVC/CVV' одной цифры")
         void shouldSetCvcWithTwoNumber() {
@@ -81,6 +90,7 @@ public class CVCCVVTest {
             creditPaymentPage.fillingForm(cardInfo);
             creditPaymentPage.cvcError();
         }
+
         @Test
         @Name("Пустое поле 'CVC/CVV'")
         void shouldSetCvcEmpty() {

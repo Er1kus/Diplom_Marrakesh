@@ -20,9 +20,10 @@
 `java -jar .\artifacts\aqa-shop.jar --spring.datasource.url=jdbc:postgresql://localhost:5432/app`
 ### Запуск тестов и формирование отчетов:
 Открыть новый терминал и запустить тесты командой:
-+ Для MySQL`.\gradlew clean test -Duser=app -Dpassword=pass -Durl=jdbc:mysql://localhost:3306/app`
++ Для MySQL`.\gradlew test -Durl=jdbc:mysql://localhost:3306/app`
 
-+ Для PostgreSQL `.\gradlew test -Duser=app -Dpassword=pass -Durl=jdbc:postgresql://localhost:5432/app`
++ Для PostgreSQL `.\gradlew test -Durl=jdbc:postgresql://localhost:5432/app`
+
 Сформировать отчет Allure по итогам прогона тестов командой: `.\gradlew allureServe`;
 ### Завершение работы
 - После ознакомления с визуальным отчетом Allure в браузере, закрыть отчет в терминале командой:

@@ -5,6 +5,7 @@ import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
 import jdk.jfr.Name;
 import org.junit.jupiter.api.*;
+import ru.netology.domain.data.DBHelper;
 import ru.netology.domain.data.DataHelper;
 import ru.netology.domain.pages.MainPage;
 
@@ -25,6 +26,10 @@ public class CardNumberTest {
     public void setUp() {
         Configuration.holdBrowserOpen = true;
         open("http://localhost:8080");
+    }
+    @AfterEach
+    void clearData() {
+        DBHelper.DropData();
     }
 
     @Nested

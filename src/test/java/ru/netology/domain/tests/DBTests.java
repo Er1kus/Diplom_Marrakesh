@@ -40,6 +40,7 @@ public class DBTests {
     @DisplayName("Проверки БД при оплате картой")
     class CardPaymentDBTests {
         @Test
+        @Order(1)
         @Name("Получение статуса при оплате одобренной картой")
         void shouldGetStatusWithValidCardNumber() {
             var mainPage = new MainPage();
@@ -53,6 +54,7 @@ public class DBTests {
         }
 
         @Test
+        @Order(2)
         @Name("Получение статуса при оплате по отклонненой картой")
         void shouldGetStatusWithInvalidCardNumber() {
             var mainPage = new MainPage();
@@ -66,6 +68,7 @@ public class DBTests {
         }
 
         @Test
+        @Order(3)
         @Name("При вводе случайного номера карты, данные не сохраняются в таблицу order_entity ")
         void shouldNotSaveRandomCardNumber() {
             var mainPage = new MainPage();
@@ -77,6 +80,7 @@ public class DBTests {
         }
 
         @Test
+        @Order(4)
         @Name("При вводе валидного номера карты, данные в столбце 'payment_id' из 'order_entity' = 'transaction_id' из 'payment_entity'")
         void shouldSaveSamePaymentInfo() {
             var mainPage = new MainPage();
@@ -92,6 +96,7 @@ public class DBTests {
     @DisplayName("Проверки БД при оплате в кредит")
     class CreditPaymentDBTests {
         @Test
+        @Order(5)
         @Name("Получение статуса при отправке заявки на кредит по одобренной карте")
         void shouldGetStatusWithValidCardNumberCreditRequest() {
             var mainPage = new MainPage();
@@ -105,6 +110,7 @@ public class DBTests {
         }
 
         @Test
+        @Order(6)
         @Name("Получение статуса при отправке заявки на кредит по отклонненой карте")
         void shouldGetStatusWithInvalidCardNumberCreditRequest() {
             var mainPage = new MainPage();
@@ -118,6 +124,7 @@ public class DBTests {
         }
 
         @Test
+        @Order(7)
         @Name("При вводе случайного номера карты, данные не сохраняются в таблицу credit_request_entity")
         void shouldNotSaveRandomCardNumberCreditRequest() {
             var mainPage = new MainPage();
@@ -129,6 +136,7 @@ public class DBTests {
         }
 
         @Test
+        @Order(8)
         @Name("При покупке в кредит с валидного номера карты, данные в столбце 'payment_id' из 'order_entity' = 'bank_id' из 'credit_request_entity' ")
         void shouldSaveSameCreditInfo() {
             var mainPage = new MainPage();
